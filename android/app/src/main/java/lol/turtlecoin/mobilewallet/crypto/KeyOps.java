@@ -4,6 +4,7 @@ import org.spongycastle.crypto.digests.KeccakDigest;
 
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import lol.turtlecoin.mobilewallet.crypto.ed25519.Ed25519;
 import lol.turtlecoin.mobilewallet.crypto.ed25519.Ed25519.XYZT;
@@ -19,7 +20,7 @@ import static lol.turtlecoin.mobilewallet.crypto.ed25519.Ed25519.sc_check;
 
 public class KeyOps {
     private static EllipticCurveScalar RandomScalar() {
-        byte[] temp = new byte[32];
+        byte[] temp = new byte[64];
         SecureRandom rand = new SecureRandom();
         rand.nextBytes(temp);
         reduce(temp);
