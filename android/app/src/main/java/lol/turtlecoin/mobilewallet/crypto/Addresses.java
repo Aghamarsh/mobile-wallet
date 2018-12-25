@@ -1,15 +1,12 @@
 package lol.turtlecoin.mobilewallet.crypto;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bitcoinj.core.AddressFormatException;
 import org.bitcoinj.core.Base58;
 import org.spongycastle.crypto.digests.KeccakDigest;
-import org.spongycastle.util.Strings;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
-import java.util.Locale;
 
 import lol.turtlecoin.mobilewallet.crypto.keytypes.PrivateKey;
 import lol.turtlecoin.mobilewallet.crypto.keytypes.PublicKey;
@@ -42,9 +39,9 @@ public class Addresses {
         combined.addAll(checksumData);
 
         ArrayList<List<Byte>> chunks = new ArrayList<>();
-        for(int i = 0;i<combined.size();i+=8) {
-            if (i+8 <= combined.size()) {
-                chunks.add(combined.subList(i,i+8));
+        for (int i = 0; i < combined.size(); i += 8) {
+            if (i + 8 <= combined.size()) {
+                chunks.add(combined.subList(i, i + 8));
             }
         }
 
@@ -53,10 +50,10 @@ public class Addresses {
         int lastBlockSize = combined.size() % 8;
         chunks.add(combined.subList((combined.size() / 8) * 8, combined.size()));
 
-        for (int i=0;i<chunks.size();i++) {
+        for (int i = 0; i < chunks.size(); i++) {
             String tmp = Base58.encode(tobytearray(chunks.get(i)));
 
-            if (i<chunks.size()-1) {
+            if (i < chunks.size() - 1) {
                 tmp = StringUtils.leftPad(tmp, 11, '1');
             } else {
                 tmp = StringUtils.leftPad(tmp, lastBlockSize, '1');
@@ -72,7 +69,7 @@ public class Addresses {
     private static byte[] tobytearray(List<Byte> input) {
         byte[] output = new byte[input.size()];
 
-        for (int i=0;i<input.size();i++) {
+        for (int i = 0; i < input.size(); i++) {
             output[i] = input.get(i);
         }
 
@@ -82,7 +79,7 @@ public class Addresses {
     private static ArrayList<Byte> frombytearray(byte[] input) {
         ArrayList<Byte> output = new ArrayList<>();
 
-        for (byte i:input) {
+        for (byte i : input) {
             output.add(i);
         }
 
@@ -92,39 +89,46 @@ public class Addresses {
     private static char[] tochararray(List<Character> input) {
         char[] output = new char[input.size()];
 
-        for (int i=0;i<input.size();i++) {
+        for (int i = 0; i < input.size(); i++) {
             output[i] = input.get(i);
         }
 
         return output;
     }
 
-    public static PublicKeys KeysFromAddress(String address, long prefix) {
+    public static PublicKeys KeysFromAddress(String address, long prefix) throws Exception {
         char[] list = address.toCharArray();
         ArrayList<Character> addressData = new ArrayList<>();
-        for (char i:list) {
+        for (char i : list) {
             addressData.add(i);
         }
 
         ArrayList<List<Character>> chunks = new ArrayList<>();
-        for (int i=0;i<addressData.size();i+=11) {
-            if (i+11<=addressData.size()) {
-                chunks.add(addressData.subList(i,i+11));
+        for (int i = 0; i < addressData.size(); i += 11) {
+            if (i + 11 <= addressData.size()) {
+                chunks.add(addressData.subList(i, i + 11));
             }
         }
         chunks.add(addressData.subList((addressData.size() / 11) * 11, addressData.size()));
 
         ArrayList<Byte> decoded = new ArrayList<>();
 
-        for (List<Character> chunk:
-             chunks) {
-            ArrayList<Byte> decodedChunk = new ArrayList<>(frombytearray(Base58.decode(String.copyValueOf(tochararray(chunk)))));
+        for (List<Character> chunk :
+                chunks) {
+            ArrayList<Byte> decodedChunk;
+
+            try {
+                decodedChunk = new ArrayList<>(frombytearray(Base58.decode(String.copyValueOf(tochararray(chunk)))));
+            }
+            catch (AddressFormatException e) {
+                throw new Exception("Address not base58 " + e.getMessage());
+            }
 
             if (decodedChunk.size() != 0) {
                 if (decodedChunk.size() <= 8) {
                     decoded.addAll(decodedChunk);
                 } else {
-                    decoded.addAll(decodedChunk.subList(decodedChunk.size()-8,decodedChunk.size()));
+                    decoded.addAll(decodedChunk.subList(decodedChunk.size() - 8, decodedChunk.size()));
                 }
             }
         }
@@ -133,10 +137,10 @@ public class Addresses {
         ArrayList<Byte> expectedPrefixData = PackPrefixAsByteList(prefix);
         byte[] expectedPrefix = tobytearray(expectedPrefixData);
 
-        int expectedLength = expectedPrefix.length+32+32+4;
+        int expectedLength = expectedPrefix.length + 32 + 32 + 4;
 
         if (decoded.size() != expectedLength) {
-
+            throw new Exception("Address wrong length");
         }
 
         byte[] actualPrefix = new byte[expectedPrefix.length];
@@ -144,27 +148,27 @@ public class Addresses {
         byte[] view = new byte[32];
         byte[] actualChecksum = new byte[4];
 
-        int i=0;
+        int i = 0;
 
-        for (int j=0;j<expectedPrefix.length;j++) {
+        for (int j = 0; j < expectedPrefix.length; j++) {
             actualPrefix[j] = decoded.get(i++);
         }
 
-        for (int j=0;j<spend.length;j++) {
+        for (int j = 0; j < spend.length; j++) {
             spend[j] = decoded.get(i++);
         }
 
-        for (int j=0;j<view.length;j++) {
+        for (int j = 0; j < view.length; j++) {
             view[j] = decoded.get(i++);
         }
 
-        for (int j=0;j<actualChecksum.length;j++) {
+        for (int j = 0; j < actualChecksum.length; j++) {
             actualChecksum[j] = decoded.get(i++);
         }
 
-        for (int j=0;j<expectedPrefix.length;j++) {
+        for (int j = 0; j < expectedPrefix.length; j++) {
             if (actualPrefix[j] != expectedPrefix[j]) {
-
+                throw new Exception("Address wrong prefix");
             }
         }
 
@@ -180,9 +184,9 @@ public class Addresses {
 
         byte[] expectedChecksum = GetAddressChecksum(addressNoChecksum);
 
-        for (int j=0;j<expectedChecksum.length;j++) {
+        for (int j = 0; j < expectedChecksum.length; j++) {
             if (actualChecksum[j] != expectedChecksum[j]) {
-
+                throw new Exception("Address wrong checksum");
             }
         }
 
@@ -190,7 +194,7 @@ public class Addresses {
         PublicKey viewKey = new PublicKey(view);
 
         if (!KeyOps.IsValidKey(spendKey) || !KeyOps.IsValidKey(viewKey)) {
-
+            throw new Exception("Invalid public key");
         }
 
         return new PublicKeys(spendKey, viewKey);
@@ -199,15 +203,15 @@ public class Addresses {
     private static byte[] GetAddressChecksum(ArrayList<Byte> addressInBytes) {
         KeccakDigest digest = new KeccakDigest(256);
         byte[] input = new byte[addressInBytes.size()];
-        for (int i=0;i<addressInBytes.size();i++) {
+        for (int i = 0; i < addressInBytes.size(); i++) {
             input[i] = addressInBytes.get(i);
         }
-        digest.update(input,0,input.length);
+        digest.update(input, 0, input.length);
         byte[] out = new byte[32];
-        digest.doFinal(out,0);
+        digest.doFinal(out, 0);
 
         byte[] output = new byte[4];
-        System.arraycopy(out,0,output,0,4);
+        System.arraycopy(out, 0, output, 0, 4);
 
         return output;
     }
@@ -216,11 +220,11 @@ public class Addresses {
         ArrayList<Byte> output = new ArrayList<>();
 
         while (prefix >= 0x80) {
-            output.add((byte)(prefix & 0x7f | 0x80));
+            output.add((byte) (prefix & 0x7f | 0x80));
             prefix >>= 7;
         }
 
-        output.add((byte)prefix);
+        output.add((byte) prefix);
 
         return output;
     }
