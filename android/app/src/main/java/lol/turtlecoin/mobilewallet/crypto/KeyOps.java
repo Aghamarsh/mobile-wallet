@@ -56,9 +56,9 @@ public class KeyOps {
     public static KeyPair GenerateDeterministicKeys(PrivateKey seed) {
         byte[] seedTmp = seed.getData().clone();
         KeccakDigest digest = new KeccakDigest(256);
-        digest.update(seedTmp,0,seedTmp.length);
+        digest.update(seedTmp, 0, seedTmp.length);
         byte[] hashed = new byte[32];
-        digest.doFinal(hashed,0);
+        digest.doFinal(hashed, 0);
         reduce32(hashed);
         PrivateKey privateKey = new PrivateKey(hashed);
         PublicKey publicKey = PrivateKeyToPublicKey(privateKey);
