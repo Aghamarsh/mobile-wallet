@@ -27,10 +27,10 @@ class CreateNewAddressPageState extends State<CreateNewAddressPage> {
 
   Future<void> _createNewAddress() async {
     try {
-      Map<String, int> args = {
+      Map<String, dynamic> args = {
         "prefix" : 0x3bbb1d
       };
-      Map<String, String> res = await address_platform.invokeMethod('createNewAddress', args);
+      Map<dynamic, dynamic> res = await address_platform.invokeMethod('createNewAddress', args);
       address = res["address"];
       privateSpendKey = res["privateSpendKey"];
       privateViewKey = res["privateViewKey"];
@@ -50,14 +50,38 @@ class CreateNewAddressPageState extends State<CreateNewAddressPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5),
+          ),
           RaisedButton(
             child: Text('Create New Address'),
             onPressed: _createNewAddress,
           ),
           Text('Address :'),
-          Text(address),
+          Padding(
+            child: Text(address),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+          ),
           Text('Private Spend Key :'),
-          Text(privateSpendKey)
+          Padding(
+            child: Text(privateSpendKey),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+          ),
+          Text('Private View Key :'),
+          Padding(
+            child: Text(privateViewKey),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+          ),
+          Text('Public Spend Key :'),
+          Padding(
+            child: Text(publicSpendKey),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+          ),
+          Text('Public View Key :'),
+          Padding(
+            child: Text(publicViewKey),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+          ),
         ],
       ),
     );

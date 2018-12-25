@@ -27,7 +27,14 @@ public class MainActivity extends FlutterActivity {
                     public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
                         if (methodCall.method.equals("createNewAddress")) {
                             WalletKeys w = KeyOps.GenerateWalletKeys();
-                            String address = Addresses.AddressFromKeys(w.getPublicSpendKey(), w.getPublicViewKey(), (long) methodCall.argument("prefix"));
+                            String address = "";
+                            if (methodCall.argument("prefix") instanceof Integer) {
+                                Integer prefix = methodCall.argument("prefix");
+                                address = Addresses.AddressFromKeys(w.getPublicSpendKey(), w.getPublicViewKey(), prefix);
+                            } else if (methodCall.argument("prefix") instanceof Long) {
+                                Long prefix = methodCall.argument("prefix");
+                                address = Addresses.AddressFromKeys(w.getPublicSpendKey(), w.getPublicViewKey(), prefix);
+                            }
 
                             HashMap<String, String> res = new HashMap<>();
                             res.put("address",address);
