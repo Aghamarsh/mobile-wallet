@@ -8,7 +8,7 @@ Thanks for coming here.
 
 Add the following line **below** the license header **only** for the files you
 edit on your own without copying. If copied please add the source (URL,
-reference books etc.) and the copyright holder name to the below name.
+reference books etc.) and the copyright holder name to the below line.
 
 ```
 // Copyright (c) 2018, <Name of the Copyright Holder>.
