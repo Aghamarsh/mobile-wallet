@@ -1,3 +1,7 @@
+// Copyright (c) 2018, Rashed Mohammed, The TurtleCoin Developers.
+//
+// Please see the included LICENSE file for more information.
+
 import org.junit.Assert;
 import org.junit.Test;
 

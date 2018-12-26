@@ -14,6 +14,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+// Copyright (c) 2018, Rashed Mohammed, The TurtleCoin Developers.
+//
+// Please see the included LICENSE file for more information.
+
 package lol.turtlecoin.mobilewallet.crypto.ed25519;
 
 import java.security.GeneralSecurityException;

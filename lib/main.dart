@@ -1,5 +1,10 @@
+// Copyright (c) 2018, Rashed Mohammed, The TurtleCoin Developers.
+//
+// Please see the included LICENSE file for more information.
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'fork/config.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -28,7 +33,7 @@ class CreateNewAddressPageState extends State<CreateNewAddressPage> {
   Future<void> _createNewAddress() async {
     try {
       Map<String, dynamic> args = {
-        "prefix" : 0x3bbb1d
+        "prefix" : prefix
       };
       Map<dynamic, dynamic> res = await address_platform.invokeMethod('createNewAddress', args);
       address = res["address"];
