@@ -1,20 +1,22 @@
 # mobile_wallet
 
-A mobile wallet for TurtleCoin
+A native mobile wallet for TurtleCoin
 
-## Getting Started
+## Forking
 
-This project is a starting point for a Flutter application.
+If you are forking this for your project follow the [Forking Guide](FORKING.md)
+and continue with the installation procedure below.
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
-
+1. Download [Flutter](https://flutter.io/docs/get-started/install) and set it up.
+2. Make sure you add the Flutter bin to your PATH.
+3. Now clone the repo, `cd` into it and type `flutter packages get`.
+4. Connect your Android or iOS mobile and type `flutter run`
+5. If you wan't to test on emulator type `flutter emulators` to see the list of
+available emulators and type `flutter emulators --launch <EMULATOR_NAME>` to
+launch it and `flutter run` to run the app in emulator.
+ 
 ## License
 
 ```
@@ -22,3 +24,7 @@ samples, guidance on mobile development, and a full API reference.
 //
 // Please see the included LICENSE file for more information.
 ```
+
+## Donations
+
+`TRTLv2vdpF7SUMkhYMAWDGUnBFwCt9mjuBdgM1b6kazoQAuKMkthzrzahPp9nCfJUs2VcyAxtLACmQFgGbCfFB7oVHMMXkTys98`

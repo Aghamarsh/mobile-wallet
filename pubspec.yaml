@@ -3,7 +3,7 @@
 # Please see the included LICENSE file for more information.
 
 name: mobile_wallet
-description: A mobile wallet for TurtleCoin
+description: A native mobile wallet for TurtleCoin
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
