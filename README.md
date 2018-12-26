@@ -4,8 +4,8 @@ A native mobile wallet for TurtleCoin
 
 ## Forking
 
-If you are forking this for your project follow the [Forking Guide](FORKING.md)
-and continue with the installation procedure below.
+If you are forking this for your project, please follow the
+[Forking Guide](FORKING.md) and continue with the installation procedure below.
 
 ## Installation
 
