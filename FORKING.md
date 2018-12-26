@@ -4,9 +4,11 @@ Thanks for coming here.
 
 ## Step 1 : License (You may be thinking let's skip this - but don't)
 
-#### Note: Never ever do a Replace All while forking any Open Source Project. If you are found doing this, A DMCA will be issued immediately
+#### Note: Never ever do a Replace All while forking any Open Source Project. If you are found doing this, A DMCA takedown notice will be issued immediately.
 
-Add the following line **below** the license header **only** for the files you edit.
+Add the following line **below** the license header **only** for the files you
+edit on your own without copying. If copied please add the source (URL,
+reference books etc.) and the copyright holder name to the below name.
 
 ```
 // Copyright (c) 2018, <Name of the Copyright Holder>.
