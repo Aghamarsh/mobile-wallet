@@ -3,13 +3,6 @@
 // Please see the included LICENSE file for more information.
 
 import 'package:flutter/material.dart';
-import 'views/create_new_address.dart';
+import 'views/app.dart';
 
-void main() => runApp(
-  MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Turtle Wallet',
-    home: CreateNewAddressPage(),
-  )
-);
-
+void main() => runApp(WalletApp());
