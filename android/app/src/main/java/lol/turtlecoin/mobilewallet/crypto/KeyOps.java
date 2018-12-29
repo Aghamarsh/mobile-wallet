@@ -23,10 +23,12 @@ import static lol.turtlecoin.mobilewallet.crypto.ed25519.Ed25519.reduce32;
 import static lol.turtlecoin.mobilewallet.crypto.ed25519.Ed25519.sc_check;
 
 public class KeyOps {
+
+    private static SecureRandom random = new SecureRandom();
+
     private static EllipticCurveScalar RandomScalar() {
         byte[] temp = new byte[64];
-        SecureRandom rand = new SecureRandom();
-        rand.nextBytes(temp);
+        random.nextBytes(temp);
         reduce(temp);
         return new EllipticCurveScalar(temp);
     }

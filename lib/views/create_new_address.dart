@@ -7,14 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:mobile_wallet/fork/config.dart';
 
 class CreateNewAddressPage extends StatefulWidget {
-
   @override
   CreateNewAddressPageState createState() => CreateNewAddressPageState();
 }
 
 class CreateNewAddressPageState extends State<CreateNewAddressPage> {
-
-  static const address_platform = const MethodChannel('lol.turtlecoin.mobilewallet/address');
+  static const address_platform =
+      const MethodChannel('lol.turtlecoin.mobilewallet/address');
 
   String address = "";
   String privateSpendKey = "";
@@ -24,10 +23,9 @@ class CreateNewAddressPageState extends State<CreateNewAddressPage> {
 
   Future<void> _createNewAddress() async {
     try {
-      Map<String, dynamic> args = {
-        "prefix" : prefix
-      };
-      Map<dynamic, dynamic> res = await address_platform.invokeMethod('createNewAddress', args);
+      Map<String, dynamic> args = {"prefix": prefix};
+      Map<dynamic, dynamic> res =
+          await address_platform.invokeMethod('createNewAddress', args);
       address = res["address"];
       privateSpendKey = res["privateSpendKey"];
       privateViewKey = res["privateViewKey"];
@@ -37,8 +35,7 @@ class CreateNewAddressPageState extends State<CreateNewAddressPage> {
       address = e.message;
     }
 
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override
