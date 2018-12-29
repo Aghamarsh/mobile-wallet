@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'create_new_address.dart';
+import 'splash_screen.dart';
 import 'home_page.dart';
 
 class WalletApp extends StatelessWidget {
@@ -11,9 +12,11 @@ class WalletApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SplashScreen(),
       routes: {
-        '/createAddress': (BuildContext context) => CreateNewAddressPage()
+        '/homePage': (BuildContext context) => HomePage(),
+        '/createAddress': (BuildContext context) => CreateNewAddressPage(),
+        '/dashboard': (BuildContext context) => HomePage()
       },
     );
   }
