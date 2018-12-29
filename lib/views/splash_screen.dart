@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:mobile_wallet/fork/config.dart';
+
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class SplashScreen extends StatelessWidget {
         builder: (ctx, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
-              child: Image.asset('assets/turtlecoin_stacked_color.png'),
+              child: Image.asset(splashLogo),
             );
           }
 

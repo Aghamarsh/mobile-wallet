@@ -9,3 +9,9 @@ const prefix = 0x3bbb1d;
 
 // theming color.
 const brandColor = const Color(0xff00853d);
+
+// splash screen logo.
+const splashLogo = 'assets/turtlecoin_stacked_color.png';
+
+// home page logo.
+const homePageLogo = 'assets/turtlecoin_symbol_color.png';

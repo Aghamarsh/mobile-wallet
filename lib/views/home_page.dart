@@ -23,7 +23,7 @@ class HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset(
-                'assets/turtlecoin_symbol_color.png',
+                homePageLogo,
                 height: 300,
                 width: 300,
               ),
