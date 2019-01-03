@@ -9,3 +9,7 @@ const prefix = 0x3bbb1d;
 
 // theming color.
 const brandColor = const Color(0xff00853d);
+
+var theme = ThemeData(
+  
+);

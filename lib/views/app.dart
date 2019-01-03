@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'create_new_address.dart';
 import 'home_page.dart';
+import 'password.dart';
 
 class WalletApp extends StatelessWidget {
   @override
@@ -13,7 +14,8 @@ class WalletApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       routes: {
-        '/createAddress': (BuildContext context) => CreateNewAddressPage()
+        '/createAddress': (BuildContext context) => CreateNewAddressPage(),
+        '/password': (BuildContext context) => Password(),
       },
     );
   }

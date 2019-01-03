@@ -61,11 +61,7 @@ class HomePageState extends State<HomePage> {
                         color: brandColor,
                         textColor: Colors.white,
                         onPressed: () {
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text(
-                              'Feature Not Implemented yet. Please wait for next version',
-                            ),
-                          ));
+                            Navigator.of(context).pushNamed('/password');
                         },
                         child: Text('Import Wallet from keys'),
                       ),
