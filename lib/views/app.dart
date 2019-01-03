@@ -16,7 +16,7 @@ class WalletApp extends StatelessWidget {
       home: SplashScreen(),
       routes: {
         '/createAddress': (BuildContext context) => CreateNewAddressPage(),
-        '/password': (BuildContext context) => Password(),
+        '/impkeys': (BuildContext context) => ImportFromKeys(),
         '/homePage': (BuildContext context) => HomePage(),
         '/dashboard': (BuildContext context) => HomePage()
       },
