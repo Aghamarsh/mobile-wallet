@@ -31,7 +31,8 @@ class CreateNewAddressPageState extends State<CreateNewAddressPage> {
       privateViewKey = res["privateViewKey"];
       publicSpendKey = res["publicSpendKey"];
       publicViewKey = res["publicViewKey"];
-    } on PlatformException catch (e) {
+    }
+    on PlatformException catch (e) {
       address = e.message;
     }
 

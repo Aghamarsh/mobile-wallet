@@ -16,6 +16,7 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 import lol.turtlecoin.mobilewallet.crypto.Addresses;
 import lol.turtlecoin.mobilewallet.crypto.KeyOps;
 import lol.turtlecoin.mobilewallet.crypto.keytypes.WalletKeys;
+import lol.turtlecoin.mobilewallet.crypto.keytypes.PrivateKey;
 
 public class MainActivity extends FlutterActivity {
 
@@ -32,12 +33,16 @@ public class MainActivity extends FlutterActivity {
                         if (methodCall.method.equals("createNewAddress")) {
                             WalletKeys w = KeyOps.GenerateWalletKeys();
                             String address = "";
-                            if (methodCall.argument("prefix") instanceof Integer) {
+
+                            if (methodCall.argument("prefix") instanceof Integer) 
+                            {
                                 Integer prefix = methodCall.argument("prefix");
-                                address = Addresses.AddressFromKeys(w.getPublicSpendKey(), w.getPublicViewKey(), prefix);
-                            } else if (methodCall.argument("prefix") instanceof Long) {
+                                 address = Addresses.AddressFromKeys(w.getPublicSpendKey(), w.getPublicViewKey(), prefix);
+                            }
+                            else if (methodCall.argument("prefix") instanceof Long) 
+                            {
                                 Long prefix = methodCall.argument("prefix");
-                                address = Addresses.AddressFromKeys(w.getPublicSpendKey(), w.getPublicViewKey(), prefix);
+                                 address = Addresses.AddressFromKeys(w.getPublicSpendKey(), w.getPublicViewKey(), prefix);
                             }
 
                             HashMap<String, String> res = new HashMap<>();
@@ -48,7 +53,28 @@ public class MainActivity extends FlutterActivity {
                             res.put("publicViewKey", w.getPublicViewKey().toString());
 
                             result.success(res);
-                        } else {
+                        }
+                        else if(methodCall.method.equals("importFromKeys")) {
+                            String address="";
+                            String spendkey = methodCall.argument("Spendkey");
+                            String viewkey = methodCall.argument("ViewKey");
+                            PrivateKey pSpendKey = new PrivateKey(spendkey);
+                            PrivateKey pViewKey = new PrivateKey(viewkey);
+
+                            if(methodCall.argument("prefix") instanceof Integer)
+                            {
+                                Integer prefix = methodCall.argument("prefix");
+                                address = Addresses.AddressFromKeys(pSpendKey,pViewKey,prefix);
+                            }
+                            else if(methodCall.argument("prefix") instanceof Long)
+                            {
+                                Long prefix = methodCall.argument("prefix");
+                                address = Addresses.AddressFromKeys(pSpendKey,pViewKey,prefix);          
+                            }
+
+                            result.success(address);
+                        }
+                        else {
                             result.notImplemented();
                         }
                     }

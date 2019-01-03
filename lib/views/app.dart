@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'create_new_address.dart';
 import 'splash_screen.dart';
 import 'home_page.dart';
-import 'password.dart';
+import 'import_from_keys.dart';
 
 class WalletApp extends StatelessWidget {
   @override
