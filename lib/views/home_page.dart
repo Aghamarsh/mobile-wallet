@@ -3,8 +3,6 @@
 // Please see the included LICENSE file for more information.
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'create_new_address.dart';
 import 'package:mobile_wallet/fork/config.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,19 +17,28 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: FutureBuilder(
-        future: checkLogin(),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return Material(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset('assets/turtlecoin_stacked_color.png'),
-                  ],
+      body: Material(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                homePageLogo,
+                height: 300,
+                width: 300,
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: RaisedButton(
+                  color: brandColor,
+                  textColor: Colors.white,
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/createAddress');
+                  },
+                  child: Text('   Create a New Wallet   '),
                 ),
               ),
+<<<<<<< HEAD
             );
           }
 
@@ -88,39 +95,57 @@ class HomePageState extends State<HomePage> {
                           ));
                         },
                         child: Text('Import Wallet from seed'),
+=======
+              Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: RaisedButton(
+                  color: brandColor,
+                  textColor: Colors.white,
+                  onPressed: () {
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(
+                        'Feature Not Implemented yet. Please wait for next version',
+>>>>>>> upstream/dev
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 30),
-                      ),
-                    ],
-                  ),
+                      duration: Duration(seconds: 2),
+                    ));
+                  },
+                  child: Text('Import Wallet from keys'),
                 ),
-              );
-            }
-          } else {
-            return Material(
-              child: Center(
-                child: Text('${snapshot.error}'),
               ),
-            );
-          }
-        },
+              Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: RaisedButton(
+                  color: brandColor,
+                  textColor: Colors.white,
+                  onPressed: () {
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(
+                        'Feature Not Implemented yet. Please wait for next version',
+                      ),
+                      duration: Duration(seconds: 2),
+                    ));
+                  },
+                  child: Text(' Import Wallet from file '),
+                ),
+              ),
+              RaisedButton(
+                color: brandColor,
+                textColor: Colors.white,
+                onPressed: () {
+                  _scaffoldKey.currentState.showSnackBar(SnackBar(
+                    content: Text(
+                      'Feature Not Implemented yet. Please wait for next version',
+                    ),
+                    duration: Duration(seconds: 2),
+                  ));
+                },
+                child: Text('Import Wallet from seed'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
-  }
-
-  Future<bool> checkLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await Future.delayed(const Duration(seconds: 2));
-    if (prefs.getKeys().contains("login")) {
-      if (prefs.getBool("login")) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      prefs.setBool("login", false);
-      return false;
-    }
   }
 }

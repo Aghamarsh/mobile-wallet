@@ -4,7 +4,6 @@
 
 package lol.turtlecoin.mobilewallet.crypto;
 
-import org.apache.commons.lang3.StringUtils;
 import org.bitcoinj.core.AddressFormatException;
 import org.bitcoinj.core.Base58;
 import org.spongycastle.crypto.digests.KeccakDigest;
@@ -58,9 +57,11 @@ public class Addresses {
             String tmp = Base58.encode(tobytearray(chunks.get(i)));
 
             if (i < chunks.size() - 1) {
-                tmp = StringUtils.leftPad(tmp, 11, '1');
+                tmp = String.format("%11s", tmp).replace(' ', '1');
             } else {
-                tmp = StringUtils.leftPad(tmp, lastBlockSize, '1');
+                if (lastBlockSize != 0) {
+                    tmp = String.format("%" + lastBlockSize + "s", tmp).replace(' ', '1');
+                }
             }
 
             addressBuilder.append(tmp);
@@ -117,14 +118,12 @@ public class Addresses {
 
         ArrayList<Byte> decoded = new ArrayList<>();
 
-        for (List<Character> chunk :
-                chunks) {
+        for (List<Character> chunk : chunks) {
             ArrayList<Byte> decodedChunk;
 
             try {
                 decodedChunk = new ArrayList<>(frombytearray(Base58.decode(String.copyValueOf(tochararray(chunk)))));
-            }
-            catch (AddressFormatException e) {
+            } catch (AddressFormatException e) {
                 throw new Exception("Address not base58 " + e.getMessage());
             }
 
