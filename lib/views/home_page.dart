@@ -38,64 +38,6 @@ class HomePageState extends State<HomePage> {
                   child: Text('   Create a New Wallet   '),
                 ),
               ),
-<<<<<<< HEAD
-            );
-          }
-
-          if (snapshot.hasData) {
-            if (snapshot.data) {
-              return CreateNewAddressPage();
-            } else {
-              return Material(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/turtlecoin_symbol_color.png',
-                        height: 300,
-                        width: 300,
-                      ),
-                      RaisedButton(
-                        color: brandColor,
-                        textColor: Colors.white,
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/createAddress');
-                        },
-                        child: Text('   Create a New Wallet   '),
-                      ),
-                      RaisedButton(
-                        color: brandColor,
-                        textColor: Colors.white,
-                        onPressed: () {
-                            Navigator.of(context).pushNamed('/password');
-                        },
-                        child: Text('Import Wallet from keys'),
-                      ),
-                      RaisedButton(
-                        color: brandColor,
-                        textColor: Colors.white,
-                        onPressed: () {
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text(
-                              'Feature Not Implemented yet. Please wait for next version',
-                            ),
-                          ));
-                        },
-                        child: Text(' Import Wallet from file '),
-                      ),
-                      RaisedButton(
-                        color: brandColor,
-                        textColor: Colors.white,
-                        onPressed: () {
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text(
-                              'Feature Not Implemented yet. Please wait for next version',
-                            ),
-                          ));
-                        },
-                        child: Text('Import Wallet from seed'),
-=======
               Padding(
                 padding: EdgeInsets.only(bottom: 8),
                 child: RaisedButton(
@@ -105,7 +47,6 @@ class HomePageState extends State<HomePage> {
                     _scaffoldKey.currentState.showSnackBar(SnackBar(
                       content: Text(
                         'Feature Not Implemented yet. Please wait for next version',
->>>>>>> upstream/dev
                       ),
                       duration: Duration(seconds: 2),
                     ));
