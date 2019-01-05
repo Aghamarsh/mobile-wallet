@@ -7,6 +7,7 @@ import 'create_new_address.dart';
 import 'splash_screen.dart';
 import 'home_page.dart';
 import 'import_from_keys.dart';
+import 'dashboard_view.dart';
 
 class WalletApp extends StatelessWidget {
   @override
@@ -18,7 +19,7 @@ class WalletApp extends StatelessWidget {
         '/createAddress': (BuildContext context) => CreateNewAddressPage(),
         '/impkeys': (BuildContext context) => ImportFromKeys(),
         '/homePage': (BuildContext context) => HomePage(),
-        '/dashboard': (BuildContext context) => HomePage()
+        '/dashboard': (BuildContext context) => Dashboard(),
       },
     );
   }

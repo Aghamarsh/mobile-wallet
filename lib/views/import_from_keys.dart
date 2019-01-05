@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_wallet/fork/config.dart';
+import 'dashboard_view.dart';
 
 class ImportFromKeys extends StatefulWidget {
   @override
@@ -28,7 +29,8 @@ class _ImportFromKeysState extends State<ImportFromKeys> {
     try{
       Map<String, dynamic> args = {"prefix": prefix , 
                                     "Spendkey" : _privSpendKey,
-                                    "ViewKey": _privViewKey };
+                                    "ViewKey": _privViewKey 
+                                  };
 
     address=await address_platform.invokeMethod('importFromKeys', args);
     }
@@ -36,6 +38,11 @@ class _ImportFromKeysState extends State<ImportFromKeys> {
       address=e.message;
     }
     setState(() {});
+    Navigator.push(context, 
+      MaterialPageRoute(
+        builder: (context)=>AddressDisp(add : address),
+      )
+    );            
   }
 
   @override
