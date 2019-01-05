@@ -37,12 +37,11 @@ class _ImportFromKeysState extends State<ImportFromKeys> {
     on PlatformException catch(e){
       address=e.message;
     }
-    setState(() {});
     Navigator.push(context, 
       MaterialPageRoute(
-        builder: (context)=>AddressDisp(add : address),
+        builder: (context)=>Dashboard(address : address),
       )
-    );            
+    );                   
   }
 
   @override
